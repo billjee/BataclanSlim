@@ -1,0 +1,58 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+example/association/data/smartcard.csv
+example/destinationInference/GTFSold/agency.txt
+example/destinationInference/GTFSold/calendar.txt
+example/destinationInference/GTFSold/calendar_dates.txt
+example/destinationInference/GTFSold/shapes.txt
+example/destinationInference/GTFSold/routes.txt
+example/destinationInference/GTFSold/stops.txt
+example/destinationInference/GTFSold/stop_times.txt
+example/destinationInference/GTFSold/trips.txt
+example/destinationInference/smartcardSlimOld.csv
+example/destinationInference/GTFSold/STO-donnees_ouvertes_Conditions_utilisation_FINAL_pourZIP.pdf

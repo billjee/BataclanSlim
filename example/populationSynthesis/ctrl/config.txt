@@ -1,0 +1,13 @@
+
+
+ 
+=zonalFile_Gatineau_auto0.txt
+
+Person
+
+age(0,1,2,3,4,5,6) =count=age.txt=main
+sex(0,1) =count=sex.txt=main
+car(0, 1, 2, 3) =count=car.txt=main
+occ(0, 1, 2, 3) =count=occ.txt=main
+sex(0,1) =count=Censussex.csv=importance
+age(0,1,2,3,4,5,6) =count=Censusage.csv=importance
