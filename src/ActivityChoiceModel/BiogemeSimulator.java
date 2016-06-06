@@ -31,21 +31,14 @@ public class BiogemeSimulator {
 	public static ArrayList<BiogemeChoice> modelChoiceUniverse = new ArrayList<BiogemeChoice>();
 	public static HashMap<String, Double> modelNests = new HashMap<String, Double>();
 	
-	//public static double stoScale = 1;
-	//public static double noPtScale = 1;
-	
-	/**
-	 * choiceUniverse is required only for simulating the model with smart card data. For simulating the model with the travel survey, alternatives are computed a bit differently.
-	 */
-	//HashMap<String, BiogemeChoice> choiceUniverse = new HashMap<String, BiogemeChoice>();
-	
+
 	public BiogemeSimulator(){
 	}
 	
-	public BiogemeSimulator(String pathControleFile, String pathOutput, String pathHypothesis) throws IOException{
+	/*public BiogemeSimulator(String pathControleFile, String pathOutput, String pathHypothesis) throws IOException{
 		myCtrlGen.generateBiogemeControlFile(pathOutput);
 		myCtrlGen.initialize(pathControleFile, pathHypothesis);
-	}
+	}*/
 	
 	public BiogemeSimulator(BiogemeControlFileGenerator ctrlGen){
 		myCtrlGen = ctrlGen;
@@ -73,30 +66,8 @@ public class BiogemeSimulator {
 	private ArrayList<BiogemeHypothesis> generateConstantHypothesis() {
 		// TODO Auto-generated method stub
 		ArrayList<BiogemeHypothesis> constants = new ArrayList<BiogemeHypothesis>();
-		/*boolean noPt = false;
-		for(BiogemeChoice currChoice: BiogemeControlFileGenerator.choiceIndex){
-			BiogemeHypothesis currHypothesis = new BiogemeHypothesis();
-			String currCstName = currChoice.getConstantName();
-			if(!currCstName.equals("C_NOPT")){
-				currHypothesis.setCoefName(currCstName);
-				constants.add(currHypothesis);
-			}
-			else if(currCstName.equals("C_NOPT") && !noPt){
-				currHypothesis.setCoefName(currCstName);
-				constants.add(currHypothesis);
-				noPt = true;
-			}
-			else{
-			}
-			
-			/*for(String dim: currChoice.choiceCombination.keySet()){
-				ArrayList<Integer> category = new ArrayList<Integer>();
-				category.add(currChoice.choiceCombination.get(dim));
-				currHypothesis.setAffectedDimension(dim, category);
-			}*/
-			
-		//}
-	for(BiogemeChoice currChoice: modelChoiceUniverse){
+	
+		for(BiogemeChoice currChoice: modelChoiceUniverse){
 			BiogemeHypothesis currHypothesis = new BiogemeHypothesis();
 			String currCstName = currChoice.getConstantName();
 			currHypothesis.setCoefName(currCstName);
@@ -111,16 +82,13 @@ public class BiogemeSimulator {
 		for(BiogemeAgent person: myPopulationSample){
 			ArrayList<BiogemeChoice> choiceSet = new ArrayList<BiogemeChoice>();
 			if(mode == 1){choiceSet = modelChoiceUniverse;}
-			else if(mode == 2){
-				System.out.println("this was not coded");
-				choiceSet = person.generateChoiceSetFromTravelSurvey();}
-			else if(mode == 3){choiceSet = person.generateChoiceSetFromTravelSurveyCHEAT();}
+			else if(mode == 2){choiceSet = person.generateChoiceSetFromTravelSurvey();}
+			else if(mode == 3){choiceSet = person.generateChoiceSetFromTravelSurveyAlternatives();}
 			
 			if(useAge){
 				choiceSet = person.restrainChoiceSet(choiceSet);
 			}
 			person.applyModel(choiceSet);
-			//applyPostTreatment(person);
 			n++;
 			if(n%1000 == 0){
 				System.out.println("-- " + n + " agents were processed out of " + N);
@@ -160,7 +128,7 @@ public class BiogemeSimulator {
 
 	
 
-	private void applyPostTreatment(BiogemeAgent person) {
+	/*private void applyPostTreatment(BiogemeAgent person) {
 		// TODO Auto-generated method stub
 			// TODO Auto-generated method stub
 		int choiceId = Integer.parseInt(person.myAttributes.get(UtilsTS.sim));
@@ -184,7 +152,7 @@ public class BiogemeSimulator {
 				person.myAttributes.put(UtilsTS.sim, Integer.toString(ptCaseId));
 			}
 		}
-	}
+	}*/
 
 	private int getCaseId(String caseName) {
 		// TODO Auto-generated method stu
@@ -196,16 +164,26 @@ public class BiogemeSimulator {
 		return -1;
 	}
 
-	private String getChoiceName(String string) {
+	/**
+	 * 
+	 * @param caseId
+	 * @return
+	 */
+	private String getChoiceName(String caseId) {
 		// TODO Auto-generated method stub
 		for(BiogemeChoice temp: myCtrlGen.choiceIndex){
-			if(temp.biogeme_case_id == Integer.parseInt(string)){
+			if(temp.biogeme_case_id == Integer.parseInt(caseId)){
 				return temp.getConstantName();
 			}
 		}
 		return null;
 	}
 	
+	/**
+	 * Return the {@link BiogemeChoice} corresponding to the id inputed.
+	 * @param groupId
+	 * @return
+	 */
 	public static BiogemeChoice getChoice(int groupId) {
 		// TODO Auto-generated method stub
 		for(BiogemeChoice temp: modelChoiceUniverse){

@@ -60,15 +60,6 @@ public class BiogemeChoice {
 		//System.out.println("oups " + currH.affectingDimensionName);
 		return false;
 	}
-	
-	/*public boolean isCst(BiogemeHypothesis currH){
-		// TODO Auto-generated method stub
-		if(currH.coefName.equals(getConstantName())){
-			return true;
-		}
-		
-		return false;
-	}*/
 
 	public double getAffectingValue(BiogemeHypothesis currH, BiogemeAgent currAgent) {
 		// TODO Auto-generated method stub

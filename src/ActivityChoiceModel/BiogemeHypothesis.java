@@ -54,7 +54,7 @@ public class BiogemeHypothesis {
 		return answer;
 	}
 	
-	public boolean isCst() {
+	/*public boolean isCst() {
 		// TODO Auto-generated method stub
 		for(BiogemeChoice currChoice: BiogemeControlFileGenerator.choiceIndex){
 			if(this.coefName.equals(currChoice.getConstantName())){
@@ -62,5 +62,5 @@ public class BiogemeHypothesis {
 			}
 		}
 		return false;
-	}
+	}*/
 }

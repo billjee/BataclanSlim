@@ -26,8 +26,8 @@ public class BiogemeControlFileGenerator {
 	InputDataReader descReader = new InputDataReader();
 	InputDataReader hypothesisReader = new InputDataReader();
 	OutputFileWritter myDataWriter =  new OutputFileWritter();
-    static //HashMap<String, Integer> choiceDimensions = new HashMap<String,Integer>();
-	HashMap<String, BiogemeChoiceDimension> choiceDimensions = new HashMap<String,BiogemeChoiceDimension>();
+	//static HashMap<String, Integer> choiceDimensions = new HashMap<String,Integer>();
+	static HashMap<String, BiogemeChoiceDimension> choiceDimensions = new HashMap<String,BiogemeChoiceDimension>();
     static ArrayList<String> dimensionOrder = new ArrayList<String>();
     ArrayList<HashMap<String,Integer>> combinations = new ArrayList<HashMap<String,Integer>>();
     public static ArrayList<BiogemeHypothesis> hypothesis = new ArrayList<BiogemeHypothesis>();
@@ -105,7 +105,6 @@ private ArrayList<BiogemeHypothesis> getHypothesis() throws NumberFormatExceptio
     	strTok = descReader.myFileReader.readLine();
     	while ((strTok = descReader.myFileReader.readLine()) != null){
     		String[] tok = strTok.trim().split(Utils.COLUMN_DELIMETER);
-    		//dimensions.put(tok[0], Integer.parseInt(tok[1].trim()));*/
     		BiogemeChoiceDimension currDim = new BiogemeChoiceDimension();
     		currDim.myName = tok[0].trim();
     		currDim.myCardinal = Integer.parseInt(tok[1].trim());
@@ -119,7 +118,6 @@ private ArrayList<BiogemeHypothesis> getHypothesis() throws NumberFormatExceptio
     		myDim.put(tok[0].trim(),currDim);
     		dimensionOrder.add(tok[0].trim());
         }
-    	//return dimensions;
     	return myDim;
     }
     
@@ -255,7 +253,6 @@ private ArrayList<BiogemeHypothesis> getHypothesis() throws NumberFormatExceptio
     		}
     		
     		if(requiresCoefficient){
-    			//output += " + " + e.coefName + " * " + e.coefName + UtilsTS.var;
     			if(e.isDummy){
     				output += " + " + e.coefName + " * " + getDummyName(e);
     			}
@@ -542,9 +539,6 @@ private ArrayList<BiogemeHypothesis> getHypothesis() throws NumberFormatExceptio
     	myDataWriter.WriteToFile("[Exclude]");
     	//myDataWriter.WriteToFile("(GRPAGE == 0) >= 1");
     	myDataWriter.WriteToFile("(OCCUP == -1) + (CHOICE == -1 ) >= 1");
-    			
-    	//myDataWriter.WriteToFile("((P_GRAGE == 1) + (P_STATUT == 6) + (P_STATUT == 8) + (P_STATUT == 5) + (N_ACT == 0))  >= 1  //+ ((P_STATUT != 1) + (P_STATUT != 2)) / 2)");
-    	
     }
     
 
@@ -587,17 +581,5 @@ private ArrayList<BiogemeHypothesis> getHypothesis() throws NumberFormatExceptio
 			}
 		}
 		return nestsChoices;
-	}
-
-	public Smartcard getStayHomeChoice() {
-		// TODO Auto-generated method stub
-		for(BiogemeChoice temp : choiceIndex){
-			if(temp.getConstantName().equals(UtilsSM.noPt)){
-				Smartcard answer = new Smartcard(temp);
-				answer.columnId = PublicTransitSystem.mySmartcards.size();
-				return answer;
-			}
-		}
-		return null;
 	}
 }
